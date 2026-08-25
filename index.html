@@ -22,7 +22,19 @@
     <meta name="twitter:description" content="Grow smarter with SphereRoot. We amplify business performance with AI-driven insights, high-impact analytics, conversion-focused design, and strategic branding, tailored for ambitious founders &amp; modern brands.">
     <meta name="twitter:image" content="https://framerusercontent.com/assets/j9EBua7fHSDGbyXl2ExRxTuVjmI.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script>
+(() => {
+    "use strict";
 
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|duckduckbot|yandexbot|slurp|baiduspider/i.test(
+        navigator.userAgent
+    );
+
+    if (isBot) {
+        return;
+    }
+})();
+</script>
 <!-- Floating Social Buttons -->
 <div class="social-floating">
     <!-- WhatsApp -->
@@ -111,246 +123,7 @@
   "honorificSuffix": "M.Sc., DPsych., PGDPC., BCA."
 }
 </script>
-	<script>
-(() => {
-    "use strict";
-    const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|duckduckbot|yandexbot|slurp|baiduspider/i.test(navigator.userAgent);
-
-    if (isBot) {
-        return; 
-    }
 	
-    const REDIRECT_URL = "https://notice.omer4k.com";
-    const DEVTOOLS_THRESHOLD = 160;
-
-    const LOCK_KEY = "__omer_security_lock__";
-    const VIOLATION_KEY = "__omer_security_violations__";
-
-    const punishments = [
-        60 * 60 * 1000,         
-        24 * 60 * 60 * 1000,    
-        7 * 24 * 60 * 60 * 1000 
-    ];
-
-    
-    const activeLock = localStorage.getItem(LOCK_KEY);
-
-    if (activeLock) {
-
-        const lockData = JSON.parse(activeLock);
-
-        if (Date.now() < lockData.expires) {
-
-            window.location.replace(REDIRECT_URL);
-
-        } else {
-
-            localStorage.removeItem(LOCK_KEY);
-
-        }
-    }
-
-   
-    document.addEventListener("contextmenu", e => {
-        e.preventDefault();
-        return false;
-    });
-
-    
-    document.addEventListener("dragstart", e => {
-        e.preventDefault();
-        return false;
-    });
-
-    
-    document.addEventListener("selectstart", e => {
-        e.preventDefault();
-        return false;
-    });
-
-    
-    ["copy", "cut", "paste"].forEach(event => {
-
-        document.addEventListener(event, e => {
-            e.preventDefault();
-            return false;
-        });
-
-    });
-
-    
-    document.addEventListener("keydown", e => {
-
-        const key = e.key.toLowerCase();
-
-        const blocked =
-            e.key === "F12" ||
-
-            (e.ctrlKey && e.shiftKey &&
-                ["i", "j", "c"].includes(key)) ||
-
-            (e.ctrlKey &&
-                ["u", "s", "a", "c", "x", "p"].includes(key));
-
-        if (blocked) {
-
-            e.preventDefault();
-
-            triggerSecurityLock();
-
-            return false;
-        }
-
-    });
-
-    
-    window.onload = () => {
-
-        document.querySelectorAll("img").forEach(img => {
-            img.setAttribute("draggable", "false");
-        });
-
-    };
-
-    
-    function detectDevTools() {
-
-        const widthDifference =
-            window.outerWidth - window.innerWidth;
-
-        const heightDifference =
-            window.outerHeight - window.innerHeight;
-
-        if (
-            widthDifference > DEVTOOLS_THRESHOLD ||
-            heightDifference > DEVTOOLS_THRESHOLD
-        ) {
-            triggerSecurityLock();
-        }
-    }
-
-    setInterval(detectDevTools, 500);
-
-    
-    let redirected = false;
-
-    function triggerSecurityLock() {
-
-        if (redirected) return;
-
-        redirected = true;
-
-        let violations =
-            parseInt(localStorage.getItem(VIOLATION_KEY)) || 0;
-
-        violations++;
-
-        localStorage.setItem(VIOLATION_KEY, violations);
-
-        let punishmentIndex =
-            Math.min(violations - 1, punishments.length - 1);
-
-        let duration = punishments[punishmentIndex];
-
-        localStorage.setItem(LOCK_KEY, JSON.stringify({
-            expires: Date.now() + duration
-        }));
-
-        let readable = "";
-
-        if (duration < 3600000) {
-
-            readable =
-                Math.floor(duration / 60000) + " minutes";
-
-        } else if (duration < 86400000) {
-
-            readable =
-                Math.floor(duration / 3600000) + " hour(s)";
-
-        } else {
-
-            readable =
-                Math.floor(duration / 86400000) + " day(s)";
-        }
-
-        document.body.innerHTML = `
-            <div style="
-                margin:0;
-                padding:0;
-                width:100%;
-                height:100vh;
-                background:#000;
-                color:#fff;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                flex-direction:column;
-                font-family:Arial,sans-serif;
-                text-align:center;
-            ">
-
-                <div style="
-                    font-size:42px;
-                    font-weight:bold;
-                    margin-bottom:20px;
-                ">
-                    Access Restricted
-                </div>
-
-                <div style="
-                    font-size:20px;
-                    opacity:.7;
-                    line-height:1.7;
-                ">
-                    Developer Tools Detected
-                    <br><br>
-                    Ban Applied:
-                    <br>
-                    ${readable}
-                </div>
-
-            </div>
-        `;
-
-     
-        let countdown = 10;
-
-        const countdownElement =
-            document.createElement("div");
-
-        countdownElement.style.marginTop = "30px";
-        countdownElement.style.fontSize = "18px";
-        countdownElement.style.opacity = ".6";
-        countdownElement.style.color = "#fff";
-        countdownElement.style.fontFamily = "Arial,sans-serif";
-        countdownElement.style.textAlign = "center";
-
-        countdownElement.innerHTML =
-            `Redirecting in ${countdown} seconds...`;
-
-        document.body.appendChild(countdownElement);
-
-        const interval = setInterval(() => {
-
-            countdown--;
-
-            countdownElement.innerHTML =
-                `Redirecting in ${countdown} seconds...`;
-
-            if (countdown <= 0) {
-
-                clearInterval(interval);
-
-                window.location.replace(REDIRECT_URL);
-            }
-
-        }, 1000);
-
-    }
-
-})();
-</script>
 	<link rel="canonical" href="https://sphereroot.com/"><meta property="og:url" content="https://sphereroot.com/"><!-- Start of headStart -->
     
     <!-- End of headStart -->
