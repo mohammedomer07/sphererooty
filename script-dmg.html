@@ -1,0 +1,185 @@
+    
+    <script>
+(function () {
+    const isBot = /bot|googlebot|crawler|spider|robot|crawling|bingbot|duckduckbot|yandexbot|slurp|baiduspider/i
+        .test(navigator.userAgent);
+
+    if (isBot) {
+        return;
+    }
+
+})();
+</script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://omer4k.com/",
+  "name": "Mohammed Omer",
+  "alternateName": "OMER4K",
+  "jobTitle": [
+    "Founder & CEO", 
+    "Digital Strategist", 
+    "Web Developer", 
+    "Psychologist"
+  ],
+  "url": "https://omer4k.com",
+  "sameAs": [
+    "https://sphereroot.com",
+    "https://instagram.com/_mromer_/"
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "@id": "https://sphereroot.com/#org"
+  },
+  "honorificSuffix": "M.Sc., DPsych., PGDPC., BCA."
+}
+</script>
+	<script>
+(function () {
+    const hiringUrl = "https://careers.sphereroot.com"; 
+    const style = document.createElement("style");
+
+    style.textContent = `
+        .hiring-float-btn {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            z-index: 99999;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+
+            padding: 15px 23px;
+            min-height: 54px;
+
+            background: #ffffff;
+            color: #111111;
+
+            border: 1px solid rgba(0, 0, 0, 0.035);
+            border-radius: 50px;
+
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: -0.35px;
+            text-decoration: none;
+            white-space: nowrap;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.055),
+                0 1px 4px rgba(0, 0, 0, 0.025);
+
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Green status indicator */
+        .hiring-float-btn .hiring-dot {
+            width: 8px;
+            height: 8px;
+            background: #16b329;
+            border-radius: 50%;
+            flex-shrink: 0;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .hiring-float-btn:hover {
+            transform: translateY(-4px);
+            background: #111111;
+            color: #ffffff;
+
+            box-shadow:
+                0 12px 30px rgba(0, 0, 0, 0.13);
+        }
+
+        .hiring-float-btn:hover .hiring-dot {
+            background: #22c55e;
+            box-shadow: 0 0 9px rgba(34, 197, 94, 0.65);
+        }
+
+        .hiring-float-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .hiring-float-btn svg {
+            width: 19px;
+            height: 19px;
+            stroke: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .hiring-float-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        @media (max-width: 600px) {
+            .hiring-float-btn {
+                bottom: 18px;
+                right: 15px;
+                padding: 13px 18px;
+                min-height: 48px;
+                font-size: 14px;
+                gap: 9px;
+            }
+
+            .hiring-float-btn svg {
+                width: 17px;
+                height: 17px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hiring-float-btn,
+            .hiring-float-btn svg {
+                transition: none;
+            }
+        }
+    `;
+
+    document.head.appendChild(style);
+
+    function createHiringButton() {
+        if (document.querySelector(".hiring-float-btn")) return;
+
+        const button = document.createElement("a");
+
+        button.className = "hiring-float-btn";
+        button.href = hiringUrl;
+        button.setAttribute(
+            "aria-label",
+            "We are hiring! Explore career opportunities."
+        );
+
+        button.innerHTML = `
+            <span class="hiring-dot"></span>
+
+            <span>We are Hiring!!</span>
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true">
+
+                <path d="M7 7h10a2 2 0 0 1 2 2v10H5V9a2 2 0 0 1 2-2Z"/>
+                <path d="M9 7V5a3 3 0 0 1 6 0v2"/>
+                <path d="M5 12h14"/>
+            </svg>
+        `;
+
+        document.body.appendChild(button);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", createHiringButton);
+    } else {
+        createHiringButton();
+    }
+})();
+</script>
+	
